@@ -16,7 +16,7 @@ function CurrentWeather({ weather }) {
   const description = weatherInfo[0].description;
 
   return (
-    <div className="mt-6 flex justify-center mx-2 md:mx-4">
+    <div className="mt-6 flex justify-center mx-2 sm:mx-4">
       <div className="w-full max-w-md rounded-2xl bg-[#8f79aa] text-white p-3 sm:p-6 shadow-xl">
         <div className="flex items-center justify-between">
           <div>
@@ -36,7 +36,7 @@ function CurrentWeather({ weather }) {
         </div>
 
         <div className="mt-4">
-          <p className="text-5xl sm:text-7xl font-bold">
+          <p className="text-5xl sm:text-6xl font-bold">
             {formatTemperature(main.temp)}
           </p>
         </div>

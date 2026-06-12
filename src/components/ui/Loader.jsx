@@ -11,7 +11,7 @@ function Loader() {
           border-t-transparent
         "
       />
-      <p className="text-gray-500">
+      <p className="text-white/40">
         Loading weather...
       </p>
     </div>

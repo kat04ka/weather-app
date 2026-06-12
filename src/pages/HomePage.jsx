@@ -13,6 +13,7 @@ function HomePage() {
     loading,
     error,
     searchWeather,
+    searchByLocation,
   } = useWeather();
 
   const themeClass = weather
@@ -25,7 +26,10 @@ function HomePage() {
       duration-700 ${themeClass}
       `}
     >
-      <SearchForm onSearch={searchWeather} />
+      <SearchForm
+        onSearch={searchWeather}
+        onLocation={searchByLocation}
+      />
       {loading && <Loader />}
       {error && <ErrorMessage message={error} />}
       {weather && (

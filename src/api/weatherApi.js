@@ -35,3 +35,39 @@ export const getForecast = async (city) => {
 
   return response.data;
 };
+
+export const getCurrentWeatherByCoords =
+  async (lat, lon) => {
+    const response = await axios.get(
+      'https://api.openweathermap.org/data/2.5/weather',
+      {
+        params: {
+          lat,
+          lon,
+          units: 'metric',
+          lang: 'ru',
+          appid: API_KEY,
+        },
+      }
+    );
+
+    return response.data;
+  };
+
+  export const getForecastByCoords =
+  async (lat, lon) => {
+    const response = await axios.get(
+      'https://api.openweathermap.org/data/2.5/forecast',
+      {
+        params: {
+          lat,
+          lon,
+          units: 'metric',
+          lang: 'ru',
+          appid: API_KEY,
+        },
+      }
+    );
+
+    return response.data;
+  };
