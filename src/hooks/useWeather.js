@@ -80,11 +80,10 @@ export function useWeather() {
         } finally {
           setLoading(false);
         }
-        
       },
       (error) => {
         console.log(error);
-
+        
         setError('Location access denied');
       },
     );
