@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
-import { getCurrentWeather } from '../api/weatherApi';
+import {
+  getCurrentWeather,
+  getForecast,
+} from '../api/weatherApi';
 import { useLocalStorage } from './useLocalStorage';
 
 export function useWeather() {
@@ -10,15 +13,24 @@ export function useWeather() {
     'lastCity',
     '',
   );
+  const [forecast, setForecast] = useState([]);
 
   const searchWeather = async (city) => {
     try {
       setLoading(true);
       setError(null);
 
-      const data = await getCurrentWeather(city);
-      setWeather(data);
+      const weatherData = await getCurrentWeather(city);
+      const forecastData =
+        await getForecast(city);
+      const dailyForecast =
+        forecastData.list.filter((item) =>
+          item.dt_txt.includes('12:00:00'),
+        );
+
+      setWeather(weatherData);
       setLastCity(city);
+      setForecast(dailyForecast);
     } catch (error) {
       setError('City not found');
       console.error(error);
@@ -35,6 +47,7 @@ export function useWeather() {
 
   return {
     weather,
+    forecast,
     loading,
     error,
     searchWeather,

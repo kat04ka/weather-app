@@ -7,7 +7,7 @@ function Input({
   return (
     <>
       <input
-        className="border text-sm sm:text-base rounded-lg px-4 py-2"
+        className="border text-white text-sm sm:text-base rounded-lg px-4 py-2"
         type={type}
         value={value}
         onChange={onChange}

@@ -22,7 +22,7 @@ function SearchForm({ onSearch }) {
         <h1 className="text-2xl sm:text-4xl text-center font-bold">
           Open Weather App
         </h1>
-        <h2 className="text-lg sm:text-2xl text-gray-600 ">
+        <h2 className="text-lg sm:text-2xl text-white/40">
           Weather in your city
         </h2>
 

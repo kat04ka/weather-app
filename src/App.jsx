@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import './styles/weather.css'
 import HomePage from './pages/HomePage'
 
 function App() {

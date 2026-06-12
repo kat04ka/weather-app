@@ -16,15 +16,15 @@ function CurrentWeather({ weather }) {
   const description = weatherInfo[0].description;
 
   return (
-    <div className="mt-6 flex justify-center">
-      <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-lg">
+    <div className="mt-6 flex justify-center mx-2 md:mx-4">
+      <div className="w-full max-w-md rounded-2xl bg-[#8f79aa] text-white p-3 sm:p-6 shadow-xl">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-base md:text-2xl font-bold">
+            <h2 className="text-xl md:text-2xl font-bold">
               {name}, {sys.country}
             </h2>
 
-            <p className="capitalize text-gray-500">
+            <p className="capitalize text-white/70">
               {description}
             </p>
           </div>
@@ -36,14 +36,14 @@ function CurrentWeather({ weather }) {
         </div>
 
         <div className="mt-4">
-          <p className="text-4xl md:text-5xl font-bold">
+          <p className="text-5xl sm:text-7xl font-bold">
             {formatTemperature(main.temp)}
           </p>
         </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-4">
-          <div className="rounded-xl bg-gray-100 p-3">
-            <p className="text-sm text-gray-500">
+        <div className="mt-6 grid grid-cols-2 gap-2 sm:gap-4">
+          <div className="rounded-xl bg-white/15 backdrop-blur-sm p-3">
+            <p className="text-sm text-white/70">
               Feels like
             </p>
 
@@ -52,8 +52,8 @@ function CurrentWeather({ weather }) {
             </p>
           </div>
 
-          <div className="rounded-xl bg-gray-100 p-3">
-            <p className="text-sm text-gray-500">
+          <div className="rounded-xl bg-white/15 backdrop-blur-sm p-3">
+            <p className="text-sm text-white/70">
               Humidity
             </p>
 
@@ -62,8 +62,8 @@ function CurrentWeather({ weather }) {
             </p>
           </div>
 
-          <div className="rounded-xl bg-gray-100 p-3">
-            <p className="text-sm text-gray-500">
+          <div className="rounded-xl bg-white/15 backdrop-blur-sm p-3">
+            <p className="text-sm text-white/70">
               Wind
             </p>
 
@@ -72,8 +72,8 @@ function CurrentWeather({ weather }) {
             </p>
           </div>
 
-          <div className="rounded-xl bg-gray-100 p-3">
-            <p className="text-sm text-gray-500">
+          <div className="rounded-xl bg-white/15 backdrop-blur-sm p-3">
+            <p className="text-sm text-white/70">
               Pressure
             </p>
 

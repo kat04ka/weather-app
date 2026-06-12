@@ -8,19 +8,19 @@ function ForecastCard({
   icon,
 }) {
   return (
-    <div className="flex flex-col items-center rounded-xl bg-white p-4 shadow-md">
-      <p className="font-medium">{date}</p>
+    <div className="flex flex-col items-center rounded-xl bg-[#8f79aa] p-4 shadow-md">
+      <p className="font-medium text-white">{date}</p>
 
       <img
         src={getWeatherIcon(icon)}
         alt={description}
       />
 
-      <p className="text-xl font-bold">
+      <p className="text-xl text-white font-bold">
         {formatTemperature(temp)}
       </p>
 
-      <p className="text-sm text-gray-500 capitalize">
+      <p className="text-sm text-white text-center capitalize">
         {description}
       </p>
     </div>
