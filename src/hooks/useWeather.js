@@ -16,6 +16,12 @@ export function useWeather() {
     '',
   );
   const [forecast, setForecast] = useState([]);
+  const [unit, setUnit] = useLocalStorage(
+    'temperatureUnit',
+    'C',
+  );
+  const [searchHistory, setSearchHistory] =
+    useLocalStorage('searchHistory', []);
 
   const searchWeather = async (city) => {
     try {
@@ -40,6 +46,19 @@ export function useWeather() {
     } finally {
       setLoading(false);
     }
+
+    setSearchHistory((prev) => {
+      const updated = [
+        city,
+        ...prev.filter(
+          (item) =>
+            item.toLowerCase() !==
+            city.toLowerCase(),
+        ),
+      ];
+
+      return updated.slice(0, 5);
+    });
   };
 
   const searchByLocation = () => {
@@ -83,7 +102,7 @@ export function useWeather() {
       },
       (error) => {
         console.log(error);
-        
+
         setError('Location access denied');
       },
     );
@@ -102,5 +121,8 @@ export function useWeather() {
     error,
     searchWeather,
     searchByLocation,
+    unit,
+    setUnit,
+    searchHistory,
   };
 }

@@ -1,7 +1,16 @@
-import { formatTemperature } from '../../utils/temperature';
+import { formatTime } from '../../utils/formatTime';
+import {
+  formatTemperature,
+  formatWind,
+} from '../../utils/temperature';
 import { getWeatherIcon } from '../../utils/weatherIcons';
+import ToggleSwitch from '../ui/ToggleSwitch';
 
-function CurrentWeather({ weather }) {
+function CurrentWeather({
+  weather,
+  unit,
+  setUnit,
+}) {
   if (!weather) return null;
 
   const {
@@ -24,36 +33,46 @@ function CurrentWeather({ weather }) {
               {name}, {sys.country}
             </h2>
 
-            <p className="capitalize text-white/70">
+            <p className="capitalize text-white/80">
               {description}
             </p>
           </div>
 
-          <img
-            src={getWeatherIcon(icon)}
-            alt={description}
-          />
+          <div className="flex flex-col items-center">
+            <img
+              src={getWeatherIcon(icon)}
+              alt={description}
+            />
+          </div>
         </div>
 
-        <div className="mt-4">
+        <div className="flex justify-between mt-4">
           <p className="text-5xl sm:text-6xl font-bold">
-            {formatTemperature(main.temp)}
+            {formatTemperature(main.temp, unit)}
           </p>
+
+          <ToggleSwitch
+            value={unit}
+            onChange={setUnit}
+          />
         </div>
 
         <div className="mt-6 grid grid-cols-2 gap-2 sm:gap-4">
           <div className="rounded-xl bg-white/15 backdrop-blur-sm p-3">
-            <p className="text-sm text-white/70">
+            <p className="text-sm text-white/80">
               Feels like
             </p>
 
             <p className="font-semibold">
-              {formatTemperature(main.feels_like)}
+              {formatTemperature(
+                main.feels_like,
+                unit,
+              )}
             </p>
           </div>
 
           <div className="rounded-xl bg-white/15 backdrop-blur-sm p-3">
-            <p className="text-sm text-white/70">
+            <p className="text-sm text-white/80">
               Humidity
             </p>
 
@@ -63,22 +82,41 @@ function CurrentWeather({ weather }) {
           </div>
 
           <div className="rounded-xl bg-white/15 backdrop-blur-sm p-3">
-            <p className="text-sm text-white/70">
+            <p className="text-sm text-white/80">
               Wind
             </p>
 
             <p className="font-semibold">
-              {wind.speed} m/s
+              {formatWind(wind.speed, unit)}
             </p>
           </div>
 
           <div className="rounded-xl bg-white/15 backdrop-blur-sm p-3">
-            <p className="text-sm text-white/70">
+            <p className="text-sm text-white/80">
               Pressure
             </p>
 
             <p className="font-semibold">
               {main.pressure} hPa
+            </p>
+          </div>
+          <div className="rounded-xl bg-white/15 backdrop-blur-sm p-3">
+            <p className="text-sm text-white/80">
+              Sunrise
+            </p>
+
+            <p className="font-semibold">
+              {formatTime(sys.sunrise)}
+            </p>
+          </div>
+
+          <div className="rounded-xl bg-white/15 backdrop-blur-sm p-3">
+            <p className="text-sm text-white/80">
+              Sunset
+            </p>
+
+            <p className="font-semibold">
+              {formatTime(sys.sunset)}
             </p>
           </div>
         </div>
