@@ -10,6 +10,8 @@ function CurrentWeather({
   weather,
   unit,
   setUnit,
+  toggleFavorite,
+  favorites,
 }) {
   if (!weather) return null;
 
@@ -23,15 +25,24 @@ function CurrentWeather({
 
   const icon = weatherInfo[0].icon;
   const description = weatherInfo[0].description;
+  const isFavorite = favorites.includes(name);
 
   return (
     <div className="mt-6 flex justify-center mx-2 sm:mx-4">
       <div className="w-full max-w-md rounded-2xl bg-[#8f79aa] text-white p-3 sm:p-6 shadow-xl">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-xl md:text-2xl font-bold">
-              {name}, {sys.country}
-            </h2>
+            <div className="flex items-center gap-2">
+              <h2 className="text-xl md:text-2xl font-bold">
+                {name}, {sys.country}
+              </h2>
+              <button
+                onClick={() => toggleFavorite(name)}
+                className="text-2xl hover:scale-110 transition"
+              >
+                {isFavorite ? '❤️' : '🤍'}
+              </button>
+            </div>
 
             <p className="capitalize text-white/80">
               {description}

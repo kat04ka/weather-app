@@ -49,7 +49,7 @@ function SearchForm({ onSearch, onLocation }) {
           type="button"
           onClick={onLocation}
         >
-          📍 My Location
+          My Location
         </Button>
       </div>
     </div>

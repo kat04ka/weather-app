@@ -22,6 +22,8 @@ export function useWeather() {
   );
   const [searchHistory, setSearchHistory] =
     useLocalStorage('searchHistory', []);
+  const [favorites, setFavorites] =
+    useLocalStorage('favorites', []);
 
   const searchWeather = async (city) => {
     try {
@@ -108,6 +110,28 @@ export function useWeather() {
     );
   };
 
+  const clearHistory = () => {
+    setSearchHistory([]);
+  };
+
+  const toggleFavorite = (city) => {
+    setFavorites((prev) =>
+      prev.includes(city)
+        ? prev.filter((item) => item !== city)
+        : [...prev, city],
+    );
+  };
+
+  const clearFavorites = () => {
+    setFavorites([]);
+  };
+
+  const removeFavorite = (city) => {
+    setFavorites((prev) =>
+      prev.filter((item) => item !== city),
+    );
+  };
+
   useEffect(() => {
     if (lastCity) {
       searchWeather(lastCity);
@@ -124,5 +148,10 @@ export function useWeather() {
     unit,
     setUnit,
     searchHistory,
+    clearHistory,
+    toggleFavorite,
+    favorites,
+    clearFavorites,
+    removeFavorite,
   };
 }
