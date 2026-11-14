@@ -16,6 +16,14 @@ export function useWeather() {
     '',
   );
   const [forecast, setForecast] = useState([]);
+  const [unit, setUnit] = useLocalStorage(
+    'temperatureUnit',
+    'C',
+  );
+  const [searchHistory, setSearchHistory] =
+    useLocalStorage('searchHistory', []);
+  const [favorites, setFavorites] =
+    useLocalStorage('favorites', []);
 
   const searchWeather = async (city) => {
     try {
@@ -40,6 +48,19 @@ export function useWeather() {
     } finally {
       setLoading(false);
     }
+
+    setSearchHistory((prev) => {
+      const updated = [
+        city,
+        ...prev.filter(
+          (item) =>
+            item.toLowerCase() !==
+            city.toLowerCase(),
+        ),
+      ];
+
+      return updated.slice(0, 5);
+    });
   };
 
   const searchByLocation = () => {
@@ -74,18 +95,38 @@ export function useWeather() {
           setForecast(dailyForecast);
           setLastCity(weatherData.name);
         } catch (error) {
-          setError(
-            'Failed to get location weather',
-          );
+          setError('Failed to get location weather');
+          console.log(error)
         } finally {
           setLoading(false);
         }
       },
       (error) => {
-        console.log(error);
-        
         setError('Location access denied');
+        console.log(error);
       },
+    );
+  };
+
+  const clearHistory = () => {
+    setSearchHistory([]);
+  };
+
+  const toggleFavorite = (city) => {
+    setFavorites((prev) =>
+      prev.includes(city)
+        ? prev.filter((item) => item !== city)
+        : [...prev, city],
+    );
+  };
+
+  const clearFavorites = () => {
+    setFavorites([]);
+  };
+
+  const removeFavorite = (city) => {
+    setFavorites((prev) =>
+      prev.filter((item) => item !== city),
     );
   };
 
@@ -102,5 +143,13 @@ export function useWeather() {
     error,
     searchWeather,
     searchByLocation,
+    unit,
+    setUnit,
+    searchHistory,
+    clearHistory,
+    toggleFavorite,
+    favorites,
+    clearFavorites,
+    removeFavorite,
   };
 }
