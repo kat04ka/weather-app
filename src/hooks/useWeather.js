@@ -95,17 +95,15 @@ export function useWeather() {
           setForecast(dailyForecast);
           setLastCity(weatherData.name);
         } catch (error) {
-          setError(
-            'Failed to get location weather',
-          );
+          setError('Failed to get location weather');
+          console.log(error)
         } finally {
           setLoading(false);
         }
       },
       (error) => {
-        console.log(error);
-
         setError('Location access denied');
+        console.log(error);
       },
     );
   };

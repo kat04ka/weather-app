@@ -1,16 +1,13 @@
-import { useState } from 'react'
-import './App.css'
-import './styles/weather.css'
-import HomePage from './pages/HomePage'
+import './App.css';
+import './styles/weather.css';
+import HomePage from './pages/HomePage';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-    <HomePage />
+      <HomePage />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
